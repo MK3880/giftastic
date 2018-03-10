@@ -3,36 +3,67 @@
 <head>
     <meta charset="utf-8">
     <title>have fun on the internet</title>
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+          margin: 10px;
+        }
+      </style>
 </head>
 
 <body>
 
     
 
-        <div id="buttons-view">
-        </div>
+    
 
+        <h1>animal Search</h1>
+
+    
+        <div id="buttons-view"></div>
+    
         <form id="animal-form">
-            <h2>add animals here</h2>
-                <label for="animal-input">Add one Animal:</label>
-                <input type="text" id="animal-input">
-                <br>
-
-                <input id="add-animal" type="submit" value="Add an Animal">
-            </form>        
-
-
-        <div id="gifs-appear-here">
-        </div>
+          <label for="animal-input">Add a animal Bro</label>
+          <input type="text" id="animal-input">
+          <br>
+    
+          <input id="add-animal" type="submit" value="Add a animal Bro">
+        </form>
         
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
 //buttons created here
+var animals = ["ducks", "fish", "cats", "birds"];
+
+      function renderButtons() {
+        $("#buttons-view").empty();
+        for (var i = 0; i < animals.length; i++) {
+            var a = $("<button>");
+                a.addClass("animal-btn");
+                a.attr("data-name", animals[i]);
+                a.text(animals[i]);
+                $("#buttons-view").append(a);
+            }
+        }
+
+  $("#add-animal").on("click", function(event) {
+        event.preventDefault();
+        var animal = $("#animal-input").val().trim();
+
+        animals.push(animal);
+
+        renderButtons();
+      });
+
+      $(document).on("click", ".animal-btn", displayanimalInfo);
+
+      renderButtons();
 
     
-//?????an initial array and such would go here, still not gettin mine to create buttons though???
 
 //buttons call gifs to appear
 $("button").on("click", function() {
