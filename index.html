@@ -32,12 +32,14 @@
           <input id="add-animal" type="submit" value="Add a animal Bro">
         </form>
         
+        <div id="gifs-appear-here">
+        </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript">
 
 //buttons created here
-var animals = ["ducks", "fish", "cats", "birds"];
+var animals = ["duck", "fish", "cat", "bird"];
 
       function renderButtons() {
         $("#buttons-view").empty();
@@ -59,17 +61,16 @@ var animals = ["ducks", "fish", "cats", "birds"];
         renderButtons();
       });
 
-      $(document).on("click", ".animal-btn", displayanimalInfo);
 
       renderButtons();
 
     
 
 //buttons call gifs to appear
-$("button").on("click", function() {
-    var animal = $(this).attr("data-animal");
+$(".animal-btn").on("click", function() {
+    var animam = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-    animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+    animam + "&api_key=dc6zaTOxFJmzC&limit=10";
 
     $.ajax({
           url: queryURL,
@@ -82,16 +83,16 @@ $("button").on("click", function() {
             console.log(response);
             var results = response.data;
             for (var i = 0; i < results.length; i++) {
-                var animalDiv = $("<div>");
+                var animamDiv = $("<div>");
                 var p = $("<p>").text("Rating: " + results[i].rating);
-                var animalImage = $("<img>");
-                animalImage.attr("src", results[i].images.fixed_height.url);
+                var animamImage = $("<img>");
+                animamImage.attr("src", results[i].images.fixed_height.url);
 //what???vvv
                 //animalImage.attr("src", results[i].images.fixed_height_still.url);
 //^^^I know this is where the still images are... not sure what the hell I have to do to make this work though.                
-                animalDiv.append(p);
-                animalDiv.append(animalImage);
-                $("#gifs-appear-here").prepend(animalDiv);
+                animamDiv.append(p);
+                animamDiv.append(animamImage);
+                $("#gifs-appear-here").prepend(animamDiv);
             }
         });    
             
